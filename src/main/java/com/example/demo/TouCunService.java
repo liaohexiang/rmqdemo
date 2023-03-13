@@ -11,7 +11,7 @@ public class TouCunService {
 
         /** 流水表主要字段
          * ---------------------------------------------------
-         *  ukRequestID | requestChannnel | caseID | status
+         *  ukRequestID | requestChannnel | caseID | status | fail_reason
          * ---------------------------------------------------
          */
         /**
@@ -20,11 +20,24 @@ public class TouCunService {
          * 3 如果不存在
          *      3.1  计算头寸数据是否满足
          *          满足
-         *              insert 流水表 set ukRequestID =?  requestChannnel=? caseID=? status="failure"
+         *             流水ID = INSERT INTO 流水表 (ukRequestID, requestChannnel,caseID,status) VALUES (?,?,?,'success')
          *              update 头寸数据。。。
+         *              return {
+         *                  流水ID,
+         *                  "success"
+         *              }
          *          不满足
          *              return 失败
-         *
+         *      3.2 计算头寸数据是否满足
+         *          满足
+         *              同3.1
+         *          不满足 -- 如果要明确记录这笔数据失败，这种情况下ukRequestID只能使用一次
+         *              流水ID = INSERT INTO 流水表 (ukRequestID, requestChannnel,caseID,status) VALUES (?,?,?,'failure','your_fail_reason')
+         *              return {
+         *                  流水ID,
+         *                  your_fail_reason
+         *                  "fail"
+         *              }
          */
 
 
