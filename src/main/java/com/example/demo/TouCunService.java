@@ -11,12 +11,15 @@ public class TouCunService {
 
         /** 流水表主要字段
          * ---------------------------------------------------
-         *  ukRequestID | requestChannnel | caseID | status | fail_reason
+         *  流水ID(自增) | ukRequestID | requestChannnel | caseID | status | fail_reason
          * ---------------------------------------------------
          */
         /**
-         * 1 select status from 流水表 where ukRequestID=? and requestChannnel=? and caseID=?
-         * 2 如果存在这边数据返回 status:成功/失败
+         * 1 select 流水ID,status from 流水表 where ukRequestID=? and requestChannnel=? and caseID=?
+         * 2 如果存在这条流水数据返回 {
+         *                          流水ID
+         *                          status
+         *                         }
          * 3 如果不存在
          *      3.1  计算头寸数据是否满足
          *          满足
@@ -24,7 +27,7 @@ public class TouCunService {
          *              update 头寸数据。。。
          *              return {
          *                  流水ID,
-         *                  "success"
+         *                  status
          *              }
          *          不满足
          *              return 失败
@@ -36,7 +39,7 @@ public class TouCunService {
          *              return {
          *                  流水ID,
          *                  your_fail_reason
-         *                  "fail"
+         *                  status
          *              }
          */
 
