@@ -60,7 +60,7 @@ public class WeiTuoService {
          * 根据bizVO.getToken()查询token表的状态
          * 如果是已用，按需返回业务数据，
          * 如果是可用，执行逻辑同createWeiTuo方法，NOTE:weiTuoDBTransactionalService.createWeiTuo(bizVo)
-         * 里需要更新token状态，把token的状态修改为“已用”
+         * 里需要更新token状态，把token的状态修改为“已用"，最好把token作为唯一键也插入到业务流水表或业务主表里”
          */
     }
 
@@ -78,7 +78,7 @@ public class WeiTuoService {
     }
     public String getToken(Object tokenVo){
         String token = generateToken(tokenVo);
-        /**将token保存到"TOKEN表"且状态为"可用"**/
+        /**将token保存到"TOKEN表"且状态为"可用",NOTE:token在数据库表里是唯一键**/
         return token;
     }
 }

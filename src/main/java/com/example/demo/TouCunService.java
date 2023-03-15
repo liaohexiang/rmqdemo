@@ -26,6 +26,7 @@ public class TouCunService {
          *      3.1  计算头寸数据是否满足
          *          满足
          *             流水ID = INSERT INTO 流水表 (ukRequestID, requestChannnel,caseID,status) VALUES (?,?,?,'YOUR_SUCCESS_CODE')
+         *              （并发插入时会遇到唯一键冲突，说明已经有记录了，返回到 1 ）
          *              update 头寸数据。。。
          *              return {
          *                  ukBizID:流水ID,
