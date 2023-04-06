@@ -9,7 +9,7 @@ import org.springframework.context.annotation.EnableMBeanExport;
 public class RMQDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(RMQDemoApplication.class, args);
 	}
 
 }

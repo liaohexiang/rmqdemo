@@ -1,0 +1,25 @@
+server:
+  port: 8088
+eureka:
+  client:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#rocketmq的通用配置部分
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer: #默认的producer,会自动注入的默认的RocketMQTemplate，用来发非事务消息
+    group: nonTxGroup #默认消息group,
+    enableMsgTrace: true #开启消息跟踪,方便用来定位消息的发送和消费
+
+
+#事务消息的配置,不同的事务消息要配置不同的group
+txMessage:
+  producerOne:
+    group: txGroup1
+  producerTwo:
+    group: txGroup2
