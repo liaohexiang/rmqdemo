@@ -9,9 +9,12 @@ management:
     web:
       exposure:
         include: "*"
-#rocketmq的通用配置部分
+
+#=================rocketmq的通用配置======================
 rocketmq:
   name-server: 127.0.0.1:9876
+
+#======================非事务消息producer====================
   producer: #默认的producer,会自动注入的默认的RocketMQTemplate，用来发非事务消息
     group: nonTxGroup #默认消息group,
     enableMsgTrace: true #开启消息跟踪,方便用来定位消息的发送和消费
@@ -20,6 +23,15 @@ rocketmq:
 #事务消息的配置,不同的事务消息要配置不同的group
 txMessage:
   producerOne:
-    group: txGroup1
+    group: TOUCUN_BALANCE_CREATE_PRODUCER #命名规范：<消息名>_PRODUCER
   producerTwo:
-    group: txGroup2
+    group: TOUCUN_BALANCE_UPDATE_PRODUCER
+
+#=======================consumer配置========================
+consumer:
+  test1Consumer: DEMO_TEST1_CONSUMER
+  test1Topic: TEST1
+  toucunBalanceCreateConsumer: DEMO_TOUCUN_BALANCE_CREATE_CONSUMER
+  toucunBalanceCreateTopic: TOUCUN_BALANCE_CREATE
+  toucunBalanceUpdateConsumer: DEMO_TOUCUN_BALANCE_UPDATE_CONSUMER
+  toucunBalanceUpdateTopic: TOUCUN_BALANCE_UPDATE
