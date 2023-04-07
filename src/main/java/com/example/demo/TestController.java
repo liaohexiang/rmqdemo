@@ -16,9 +16,8 @@ public class TestController {
     @Autowired
     private RocketmqTxProducerTwo txProducerTwo;
 
-    @Autowired
-    @Qualifier("rocketMQTemplate")
-    private RocketMQTemplate rocketMQTemplate;
+
+
 
     @GetMapping("testTxProducerOne")
     public @ResponseBody String testTxProducerOne()  {
@@ -33,6 +32,13 @@ public class TestController {
         txProducerTwo.sendMessageInTransaction("TOUCUN_BALANCE_UPDATE", MessageBuilder.withPayload("{TOUCUN_BALANCE_UPDATE}").build(),null);
         return  "TOUCUN_BALANCE_UPDATE success";
     }
+
+    @Qualifier("rocketMQTemplate")
+    private RocketMQTemplate rocketMQTemplate;
+    /**
+     * 非事务消息
+     * @return
+     */
     @GetMapping("testNonTxProducer")
     public @ResponseBody String testNonTxProducer()  {
 
